@@ -20,7 +20,7 @@ int main() {
         cout << "Main Menu:\n";
         cout << "1. Query balance\n";
         cout << "2. Exit\n";
-        cout << "Enter your choice: ";
+        cout << "Enter your choice: \n";
         
         int choice;
         cin >> choice;
