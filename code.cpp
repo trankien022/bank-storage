@@ -1,20 +1,25 @@
-# include <iostream>
-# include <fstream>
-# include <string>
+#include  <iostream>
+#include  <fstream>
+#include  <string>
+#include  <limits> // added for input handling
 
 using namespace std;
-// Function to query the balance of a user
-int queryBalance(const string&account){
+
+// Function to query the balance of an user
+// Input: name of the user account
+// Output: amount of money the user have in the bank 
+int queryBalance(const string& account) {
     string filePath("./storage/" + account + ".txt");
     ifstream accountFile(filePath);
-    if (!accountFile.is_open()){
+    if (!accountFile) { // simplified the check
         return 0;
-    }
+        }
     int balance = 0;
     accountFile >> balance;
     accountFile.close();
     return balance;
 }
+
 int main() {
     while (true) {
         cout << "Main Menu:\n";
@@ -23,17 +28,24 @@ int main() {
         cout << "Enter your choice: \n";
         
         int choice;
-        cin >> choice;
+        while (!(cin >> choice) || choice < 1 || choice > 2) { // input validation
+            cout << "Invalid choice. Please try again.\n";
+            cin.clear(); // clear error flag
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // ignore bad input
+        }
+
         if (choice == 1) {
             cout << "Enter user account: ";
             string account;
-            cin >> account;
+            while (!(cin >> account)) { // input validation
+                cout << "Invalid account. Please try again.\n";
+                cin.clear(); // clear error flag
+                cin.ignore(numeric_limits<streamsize>::max(), '\n'); // ignore bad input
+            }
             int balance = queryBalance(account);
             cout << "Balance: " << balance << endl;
-        } else if (choice == 2) {
-            break;
         } else {
-            cout << "Invalid choice. Please try again.\n";
+            break;
         }
     }
     return 0;
