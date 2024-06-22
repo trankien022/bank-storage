@@ -1,10 +1,10 @@
-
 #include  <iostream>
 #include  <fstream>
 #include  <string>
 #include  <limits> // added for input handling
 
 using namespace std;
+
 // Function to query the balance of an user
 // Input: name of the user account
 // Output: amount of money the user have in the bank 
@@ -19,6 +19,7 @@ int queryBalance(const string& account) {
     accountFile.close();
     return balance;
 }
+
 int main() {
     while (true) {
         cout << "Main Menu:\n";
@@ -49,4 +50,3 @@ int main() {
     }
     return 0;
 }
-
